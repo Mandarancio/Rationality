@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="Nuovo documento 1">
+  <defs
+     id="defs4">
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#pattern4618"
+       id="pattern4676"
+       patternTransform="matrix(0.98238195,0,0,0.98238195,-897.59988,198.81559)" />
+    <pattern
+       inkscape:collect="always"
+       xlink:href="#pattern3754"
+       id="pattern4477"
+       patternTransform="matrix(0.87793846,0,0,0.87793846,-700,287.93362)" />
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective3628"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3748"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="600"
+       height="366"
+       patternTransform="translate(-850,257.93362)"
+       id="pattern3754">
+      <image
+         xlink:href="file:///home/martino/Immagini/Risorse/Vector_Interior_Design_by_neofotistou.jpg"
+         width="600"
+         height="366"
+         id="image3750"
+         x="0"
+         y="0" />
+    </pattern>
+    <inkscape:perspective
+       id="perspective4487"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="600"
+       height="366"
+       patternTransform="translate(-850,257.93362)"
+       id="pattern3754-9">
+      <image
+         xlink:href="file:///home/martino/Immagini/Risorse/Vector_Interior_Design_by_neofotistou.jpg"
+         width="600"
+         height="366"
+         id="image3750-4"
+         x="0"
+         y="0" />
+    </pattern>
+    <inkscape:perspective
+       id="perspective4522"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       inkscape:collect="always"
+       id="filter4536">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.3415752"
+         id="feGaussianBlur4538" />
+    </filter>
+    <inkscape:perspective
+       id="perspective4612"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="716"
+       height="699"
+       patternTransform="translate(-1032.7819,60.405163)"
+       id="pattern4618">
+      <image
+         xlink:href="file:///home/martino/Immagini/Risorse/Hard_Drive_Replacement_1_1_by_bogo_d.png"
+         width="716"
+         height="699"
+         id="image4614"
+         x="0"
+         y="0" />
+    </pattern>
+    <inkscape:perspective
+       id="perspective4631"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <filter
+       color-interpolation-filters="sRGB"
+       inkscape:collect="always"
+       id="filter4536-3">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.3415752"
+         id="feGaussianBlur4538-4" />
+    </filter>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       width="600"
+       height="366"
+       patternTransform="translate(-850,257.93362)"
+       id="pattern3754-2">
+      <image
+         xlink:href="file:///home/martino/Immagini/Risorse/Vector_Interior_Design_by_neofotistou.jpg"
+         width="600"
+         height="366"
+         id="image3750-5"
+         x="0"
+         y="0" />
+    </pattern>
+    <inkscape:perspective
+       id="perspective4700"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="372.76294"
+     inkscape:cy="202.52686"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="727"
+     inkscape:window-x="0"
+     inkscape:window-y="22"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Livello 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4685"
+       transform="translate(-3.2200832,0)">
+      <rect
+         y="372.36218"
+         x="-687.14288"
+         height="184.28572"
+         width="494.28571"
+         id="rect2816"
+         style="color:#000000;fill:url(#pattern4477);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.5;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         y="516.55383"
+         x="-687.89288"
+         height="40.844059"
+         width="495.78601"
+         id="rect2816-6-6"
+         style="color:#000000;fill:#000000;fill-opacity:0.59315592;fill-rule:nonzero;stroke:none;stroke-width:1.5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4536);enable-background:accumulate" />
+      <rect
+         y="516.55383"
+         x="-687.89288"
+         height="40.844059"
+         width="495.78601"
+         id="rect2816-6"
+         style="color:#000000;fill:#000000;fill-opacity:0.26615972;fill-rule:nonzero;stroke:none;stroke-width:1.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text4540"
+         y="547.13019"
+         x="-679.95734"
+         style="font-size:33.13266373px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Centabel Book;-inkscape-font-specification:'Centabel Book,'"
+         xml:space="preserve"><tspan
+           style="font-size:33.13266373px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+           y="547.13019"
+           x="-679.95734"
+           id="tspan4542"
+           sodipodi:role="line">Home Directory</tspan></text>
+    </g>
+    <g
+       id="g4678"
+       transform="translate(185.35145,-81.175784)">
+      <rect
+         y="645.75226"
+         x="-875.71442"
+         height="184.28572"
+         width="494.28571"
+         id="rect2816-3"
+         style="color:#000000;fill:url(#pattern4676);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.5;stroke-opacity:1;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <rect
+         y="789.94397"
+         x="-876.46442"
+         height="40.844059"
+         width="495.78601"
+         id="rect2816-6-6-2"
+         style="color:#000000;fill:#000000;fill-opacity:0.59315592;fill-rule:nonzero;stroke:none;stroke-width:1.5;marker:none;visibility:visible;display:inline;overflow:visible;filter:url(#filter4536-3);enable-background:accumulate" />
+      <rect
+         y="789.94397"
+         x="-876.46442"
+         height="40.844059"
+         width="495.78601"
+         id="rect2816-6-0"
+         style="color:#000000;fill:#000000;fill-opacity:0.26615972;fill-rule:nonzero;stroke:none;stroke-width:1.5;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+      <text
+         sodipodi:linespacing="100%"
+         id="text4540-0"
+         y="820.52032"
+         x="-868.52887"
+         style="font-size:33.13266373px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Centabel Book;-inkscape-font-specification:'Centabel Book,'"
+         xml:space="preserve"><tspan
+           style="font-size:33.13266373px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+           y="820.52032"
+           x="-868.52887"
+           id="tspan4542-0"
+           sodipodi:role="line">Backup Disk</tspan></text>
+      <text
+         sodipodi:linespacing="100%"
+         id="text4540-0-4"
+         y="807.74249"
+         x="-467.46298"
+         style="font-size:17.81396484px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Centabel Book;-inkscape-font-specification:'Centabel Book,'"
+         xml:space="preserve"><tspan
+           style="font-size:17.81396484px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:100%;writing-mode:lr-tb;text-anchor:start;font-family:URW Gothic L;-inkscape-font-specification:URW Gothic L Book"
+           y="807.74249"
+           x="-467.46298"
+           id="tspan4542-0-4"
+           sodipodi:role="line">200gb</tspan></text>
+    </g>
+  </g>
+</svg>

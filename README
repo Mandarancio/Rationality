@@ -1,0 +1,11 @@
+Rationality 0.01a
+
+Rationality is a relational file manager based on qt toolkit
+
+*To Compile 
+
+mv in this directory
+$qmake
+$make
+
+
