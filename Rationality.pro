@@ -6,8 +6,11 @@ QT += sql \
     xml \
     dbus \
     webkit
-TARGET = Rationality
 TEMPLATE = app
+TARGET = Rationality
+MOC_DIR = tmp
+OBJECTS_DIR = obj
+DESTDIR = bin
 SOURCES += main.cpp \
     rationality.cpp \
     folderview.cpp \
