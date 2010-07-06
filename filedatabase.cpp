@@ -9,20 +9,16 @@
 FileDatabase::FileDatabase(QObject *parent) :
     QObject(parent)
 {
+    QDir dir;
+    if (!dir.exists(QDir::homePath()+"/.rationality/")) dir.mkdir(QDir::homePath()+"/.rationality/");
+
     db = QSqlDatabase::addDatabase("QSQLITE","file.db");
     db.setDatabaseName(QDir::homePath()+"/.rationality/file.db");
 
     if(!db.open())
            qWarning()<<"Errore di connessione";
-    myQuery = QSqlQuery(db);
-
-    if (myQuery.exec("CREATE TABLE tag (key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL);")) qWarning()<<"Tabella creata";
-    if (myQuery.exec("CREATE TABLE parent (child INTEGER NOT NULL, parent INTEGER NOT NULL);")) qWarning()<<"Tabella creata";
-    if (myQuery.exec("CREATE TABLE filetag(file INTEGER NOT NULL, tag INTEGER NOT NULL);")) qWarning()<<"Tabella creata";
-    if (myQuery.exec("CREATE TABLE file (key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL,  path TEXT NOT NULL);")) qWarning()<<"Tabella creata";
 
     location="Root";
-
 }
 
 void FileDatabase::appendFilter(QString f){
@@ -39,20 +35,20 @@ QList<Element*> FileDatabase::Elements(){
         QList<Element*> list;
         QString index;
         myQuery.exec("SELECT tag.key  FROM tag WHERE tag.name = '"+location+"' ;");
-     while (myQuery.next()) {
+        while (myQuery.next()) {
             index = myQuery.value(0).toString();
             
         }
         QSqlQuery query = QSqlQuery(db);
         int tid;
         QString child;
-        myQuery.exec("SELECT tag.name,tag.key FROM parent JOIN tag ON parent.child=tag.key WHERE parent.parent="+index+";");
+        myQuery.exec("SELECT tag.name,tag.key FROM tag WHERE tag.parent="+index+";");
         //int j=0;
         while (myQuery.next()){
             Element * e = new Element();
             temp=myQuery.value(0).toString();
             tid=myQuery.value(1).toInt();
-            if (!query.exec("SELECT tag.name FROM tag JOIN parent ON parent.child=tag.key WHERE parent.parent ="+QString::number(tid,'0',0)+";")) qWarning()<<"Errore";
+            if (!query.exec("SELECT tag.name FROM tag WHERE tag.parent ="+QString::number(tid,'0',0)+";")) qWarning()<<"Errore";
             while (query.next()){
                 child=query.value(0).toString();
                 if (QString::compare(child,location)!=0 && !e->Tags().contains(child) && QString::compare(temp,child))
@@ -67,17 +63,22 @@ QList<Element*> FileDatabase::Elements(){
         int fid;
         QFile * fileInfo;
         QString tag;
+        int pID;
         while (myQuery.next()){
             ElementFile * e = new ElementFile();
             temp=myQuery.value(0).toString();
             fid=myQuery.value(2).toInt();
 
 
-            query.exec("SELECT tag.name FROM filetag JOIN tag ON filetag.tag=tag.key WHERE filetag.file="+QString::number(fid)+";");
+            query.exec("SELECT tag.name,tag.parent FROM filetag JOIN tag ON filetag.tag=tag.key WHERE filetag.file="+QString::number(fid)+";");
             while (query.next()){
                 tag=query.value(0).toString();
-                if (QString::compare(tag,location)!=0 && !e->Tags().contains(tag))
-                    e->addTag(tag);
+                pID=query.value(1).toInt();
+                if (QString::compare(tag,location)!=0 && !e->Tags().contains(tag)) {
+                    if (pID==0)
+                        e->addTag(tag);
+                    else e->addSecondary(tag);
+                }
             }
             e->setRelation(false);
             e->setName(temp);
@@ -137,6 +138,7 @@ QList<Element*> FileDatabase::filtredElements(){
     ElementFile * e;
     QString path;
     QString t;
+    int pID;
     for (int i=0; i<files.length();i++){
         e=new ElementFile();
         myQuery.exec("SELECT file.name,file.path FROM file WHERE file.key="+QString::number(files[i])+";");
@@ -144,11 +146,13 @@ QList<Element*> FileDatabase::filtredElements(){
             e->setName(myQuery.value(0).toString());
             e->setPath(myQuery.value(1).toString());
         }
-        query.exec("SELECT tag.name FROM filetag JOIN tag ON filetag.tag=tag.key WHERE filetag.file="+QString::number(files[i])+";");
+        query.exec("SELECT tag.name,tag.hidden FROM filetag JOIN tag ON filetag.tag=tag.key WHERE filetag.file="+QString::number(files[i])+";");
         while (query.next()){
+            pID=query.value(1).toInt();
             t=query.value(0).toString();
-            if (e->Tags().contains(t))
+            if (e->Tags().contains(t) && pID==0)
                 e->addTag(t);
+            else if (pID==1) e->addSecondary(t);
         }
         e->setRelation(false);
         path=e->Path()+e->Name();

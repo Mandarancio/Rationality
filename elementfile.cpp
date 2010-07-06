@@ -6,7 +6,10 @@ ElementFile::ElementFile()
     haveInfo=false;
 }
 
-
+void ElementFile::addSecondary(QString tag){
+    if (!secondaryTag.contains(tag))
+        secondaryTag.push_back(tag);
+}
 void ElementFile::getInfo(){
     haveInfo=true;
     QFileInfo file(Path()+Name());

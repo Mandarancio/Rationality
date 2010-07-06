@@ -9,6 +9,7 @@ class ElementFile : public Element
 {
 public:
     ElementFile();
+    void addSecondary(QString tag);
     QString humanSize();
     QString getCDate();
     QString getLDate();
@@ -19,6 +20,7 @@ private:
     QDate creationDate,lastDate;
     qint64 size;
     QString owner;    
+    QList <QString> secondaryTag;
 };
 
 #endif // ELEMENTFILE_H

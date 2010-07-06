@@ -9,6 +9,8 @@
 #include <QDateTime>
 #include <QDate>
 
+QSqlDatabase db;
+
 struct tag{
     QString name;
     QString parent;
@@ -20,8 +22,38 @@ struct file{
     QString path;
 };
 
+//INSERTION  FUNCTION
+bool addTag(QString name, int &tk,int parent, bool hidden=false ){
+    int h=hidden;
+    QSqlQuery query(db);
+    if (!query.exec("INSERT INTO tag VALUES ( "+QString::number(tk)+","+QString::number(parent)+", '"+name+"'"+","+QString::number(h)+");")) return false;
+    else {
+        tk++;
+        return true;
+    }
+}
+
+bool addFile(QString name,QString path,int rating, int &fk ){
+    QSqlQuery query(db);
+    if (!query.exec("INSERT INTO file VALUES ( "+QString::number(fk)+",'"+name+"','"+path+"'', "+QString::number(rating)+");")) return false;
+    else {
+        fk++;
+        return true;
+    }
+}
+
+bool tagFile(int file, int tag){
+
+    QSqlQuery query(db);
+    if (!query.exec("INSERT INTO filetag VALUES ( "+QString::number(file)+","+QString::number(tag)+");")) return false;
+    else {
+        return true;
+    }
+
+}
 
 
+//COMPARE FUNCTIONS
 int containsTag(QList<tag> t1,tag t2){
     for (int i=0; i<t1.length(); i++){
         if (!QString::compare(t1[i].name,t2.name) && !QString::compare(t1[i].parent,t2.parent))
@@ -29,7 +61,6 @@ int containsTag(QList<tag> t1,tag t2){
     }
     return 0;
 }
-
 
 bool containsFile(QList<file> t1,file t2){
     for (int i=0; i<t1.length(); i++){
@@ -39,7 +70,8 @@ bool containsFile(QList<file> t1,file t2){
     return false;
 }
 
-void addDate(QSqlQuery &tq, QSqlQuery rq,QList<tag> tags, QDateTime t, int key,int &tgkey){
+//FILL DATABASE
+void addDate(QList<tag> tags, QDateTime t, int key,int &tgkey){
     tag t1,t2,t3;
     int p2,p3;
 
@@ -55,23 +87,17 @@ void addDate(QSqlQuery &tq, QSqlQuery rq,QList<tag> tags, QDateTime t, int key,i
 
         //ASSIGNETION OF NEW KEY AND ADDICTION TO THE TABLE TAG AND PARENT
         t1.id=tgkey;
-        tq.exec("INSERT INTO tag VALUES("+QString::number(tgkey)+", '"+t1.name+"');");
-        rq.exec("INSERT INTO parent VALUES("+QString::number(tgkey)+", -2);");
+        addTag(t1.name,tgkey,-2,true);
 
-        p2=tgkey;
-        tgkey++;
+        p2=tgkey-1;
+
         t2.id=tgkey;
-        tq.exec("INSERT INTO tag VALUES("+QString::number(tgkey)+", '"+t2.name+"');");
-        rq.exec("INSERT INTO parent VALUES("+QString::number(tgkey)+", "+QString::number(p2)+");");
+        addTag(t2.name,tgkey,p2,true);
 
-        p3=tgkey;
-        tgkey++;
+        p3=tgkey-1;
+
         t3.id=tgkey;
-        tq.exec("INSERT INTO tag VALUES("+QString::number(tgkey)+", '"+t3.name+"');");
-        rq.exec("INSERT INTO parent VALUES("+QString::number(tgkey)+", "+QString::number(p3)+");");
-        tgkey++;
-
-
+        addTag(t3.name,tgkey,p3,true);
     }
     else {
         t1.id=containsTag(tags,t1);
@@ -80,44 +106,38 @@ void addDate(QSqlQuery &tq, QSqlQuery rq,QList<tag> tags, QDateTime t, int key,i
         if (!containsTag(tags,t2)){
 
             t2.id=tgkey;
-            tq.exec("INSERT INTO tag VALUES("+QString::number(tgkey)+", '"+t2.name+"');");
-            rq.exec("INSERT INTO parent VALUES("+QString::number(tgkey)+", "+QString::number(p2)+");");
+            addTag(t2.name,tgkey,p2,true);
 
-            p3=tgkey;
-            tgkey++;
+            p3=tgkey-1;
+
             t3.id=tgkey;
-            tq.exec("INSERT INTO tag VALUES("+QString::number(tgkey)+", '"+t3.name+"');");
-            rq.exec("INSERT INTO parent VALUES("+QString::number(tgkey)+", "+QString::number(p3)+");");
-            tgkey++;
+            addTag(t3.name,tgkey,p3,true);
         }
         else {
             t2.id=containsTag(tags,t2);
             p3=t2.id;
             if (!containsTag(tags,t3)) {
                 t3.id=tgkey;
-                tq.exec("INSERT INTO tag VALUES("+QString::number(tgkey)+", '"+t3.name+"');");
-                rq.exec("INSERT INTO parent VALUES("+QString::number(tgkey)+", "+QString::number(p3)+");");
-                tgkey++;
+                addTag(t3.name,tgkey,p3,true);
             }
             else
                 t3.id=containsTag(tags,t3);
         }
     }
     //ASSIGNATION OF THE TAGS TO THE FILE
-    rq.exec("INSERT INTO filetag VALUES("+QString::number(key)+", "+QString::number(t1.id)+");");
-    rq.exec("INSERT INTO filetag VALUES("+QString::number(key)+", "+QString::number(t2.id)+");");
-    rq.exec("INSERT INTO filetag VALUES("+QString::number(key)+", "+QString::number(t3.id)+");");
+    tagFile(key,t1.id);
+    tagFile(key,t2.id);
+    tagFile(key,t3.id);
 }
 
 //TO UNDERSTAND IF IS BETTER MEMORIZE THE LAST UPDATE TO FILE OR THE CREATION DATE
 
-void scanFolder(QSqlQuery & fq,QSqlQuery & tq,QSqlQuery & rq, int &tk, int &fk, QString path,int pId, QList<file> f, QList<tag> t){
+void scanFolder(QSqlQuery & rq, int &tk, int &fk, QString path,int pId, QList<file> f, QList<tag> t){
 
     QDir dir(path);
     file file;
     file.path=path;
     tag tag;
-
     if (rq.exec("SELECT tag.name FROM tag WHERE tag.key="+QString::number(pId)+";"))
         tag.parent=rq.value(0).toString();
 
@@ -127,43 +147,38 @@ void scanFolder(QSqlQuery & fq,QSqlQuery & tq,QSqlQuery & rq, int &tk, int &fk, 
 
         if (l.at(i).isFile() && !l.at(i).isHidden()){
             file.name=dir.entryList().at(i);
-            if (!containsFile(f,file) && fq.exec("INSERT INTO file VALUES( "+QString::number(fk)+" , '"+dir.entryList().at(i)+"' , '"+path+"' , 0 );")) {
-                if (!rq.exec("INSERT INTO filetag VALUES( "+QString::number(fk)+" , "+QString::number(pId)+" );")) qWarning()<<"Relazione non creata";
-                else {
-                    addDate(tq,rq,t,l.at(i).created(),fk,tk);
-                    fk++;
-                }
+            if (!containsFile(f,file)) {
+                addFile(dir.entryList().at(i),path,0,fk);
+                if (!tagFile(fk,pId)) qWarning()<<"Relazione non creata";
+                addDate(t,l.at(i).created(),fk,tk);
             }
         }
         else if (l.at(i).isDir() && !l.at(i).isHidden() && QString::compare(dir.entryList().at(i),".") && QString::compare(dir.entryList().at(i),"..")){
             tag.name=dir.entryList().at(i);
-
-            if (!containsTag(t,tag) && tq.exec("INSERT INTO tag VALUES( "+QString::number(tk)+" , '"+dir.entryList().at(i)+"');")) {
-                if (!rq.exec("INSERT INTO parent VALUES( "+QString::number(tk)+" , "+QString::number(pId)+" );")) qWarning()<<"Parentela non creata";
-                tk++;
-
-            }
-
-            scanFolder(fq,tq,rq,tk,fk,path+dir.entryList().at(i)+"/",tk-1,f,t);
+            if (!containsTag(t,tag)) addTag(dir.entryList().at(i),tk,pId);
+            scanFolder(rq,tk,fk,path+dir.entryList().at(i)+"/",tk-1,f,t);
         }
         else if (!l.at(i).isHidden()) qWarning()<<"Sconosciuto";
 
     }
 }
 
+//ACCES FUNCTIONS
 QList<tag> tags(QSqlQuery &tq,QSqlQuery &rq){
     QList<tag> t;
     tag temp;
 
     QString t1,t2;
     int id;
+    int pId;
 
-    if (tq.exec("SELECT tag.name,tag.key FROM tag;")){
+    if (tq.exec("SELECT tag.name,tag.key,tag.parent FROM tag;")){
         while (tq.next()){
             t1=tq.value(0).toString();
             id=tq.value(1).toInt();
+            pId=tq.value(2).toInt();
 
-            if (rq.exec("SELECT tag.name FROM tag JOIN parent ON tag.key=parent.parent WHERE parent.child="+QString::number(id)+");")) {
+            if (rq.exec("SELECT tag.name FROM tag WHERE tag.key="+QString::number(pId)+");")) {
                 t2=rq.value(0).toString();
             }
 
@@ -203,40 +218,50 @@ QList<file> files(QSqlQuery &fq){
 int main(int argc, char *argv[])
 {
     QString path;
-    //path=QDir::homePath();
+
+    //Check for the config and db directory
+    QDir dir;
+    if (!dir.exists(QDir::homePath()+"/rationality/")) dir.mkdir(QDir::homePath()+"/rationality/");
+
     path=QDir::homePath()+"/rationality/";
 
     QCoreApplication a(argc, argv);
     qWarning()<<"Rationality daemon V 0.12";
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE","file.db");
-    db.setDatabaseName(QDir::homePath()+"/.rationality/file.db");
+    //Creation or opening of the db
+    db = QSqlDatabase::addDatabase("QSQLITE","file.db");
+    db.setDatabaseName(path+"file.db");
+
     if(!db.open())
-           qWarning()<<"Errore di connessione";
-    else qWarning()<<"Connessione effettuata";
+           qWarning()<<"Connection error";
+    else qWarning()<<"Connection done";
+
     QSqlQuery tableQuery(db);
 
     bool isNew=true;
-    if (tableQuery.exec("CREATE TABLE tag (key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL);")) qWarning()<<"Tabella creata";
-    else isNew=false;
-    if (tableQuery.exec("CREATE TABLE parent (child INTEGER NOT NULL, parent INTEGER NOT NULL);")) qWarning()<<"Tabella creata";
+    if (tableQuery.exec("CREATE TABLE tag (key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,parent INTEGER NOT NULL, name TEXT NOT NULL, hidden INTEGER NOT NULL);")) qWarning()<<"Tabella creata";
     else isNew=false;
     if (tableQuery.exec("CREATE TABLE filetag(file INTEGER NOT NULL, tag INTEGER NOT NULL);")) qWarning()<<"Tabella creata";
     else isNew=false;
     if (tableQuery.exec("CREATE TABLE file (key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL,  path TEXT NOT NULL, rating INTEGER );")) qWarning()<<"Tabella creata";
     else isNew=false;
+
+    //FOR FUTURE
 //    if (tableQuery.exec("CREATE TABLE person (key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, name TEXT NOT NULL, surname TEXT,  mail TEXT NOT NULL);")) qWarning()<<"Tabella creata";
 //    else isNew=false;
 
+    //Indexes of last tag and file
     int tgKey=-1;
     int flKey=-1;
 
+    //Some sqlquery
     QSqlQuery tagQuery(db);
     QSqlQuery fileQuery(db);
     QSqlQuery relationQuery(db);
 
+    //Initialization of db or of the key
     if (isNew){
-        tagQuery.exec("INSERT INTO tag VALUES(-1,'Root' );");
-        tagQuery.exec("INSERT INTO tag VALUES(-2,'Virtual');");
+        tagQuery.exec("INSERT INTO tag VALUES(-1,-3,'Root' );");
+        tagQuery.exec("INSERT INTO tag VALUES(-2,-3,'Virtual');");
     }
     else {
         if (fileQuery.exec("SELECT MAX(file.key) FROM file;")) {
@@ -258,7 +283,7 @@ int main(int argc, char *argv[])
     QList<file> f=files(fileQuery);
     QList<tag> t=tags(tagQuery,fileQuery);
 
-    scanFolder(fileQuery,tagQuery,relationQuery,tgKey,flKey,path,-1,f,t);
+    scanFolder(relationQuery,tgKey,flKey,path,-1,f,t);
 
     db.close();
     return 0;
