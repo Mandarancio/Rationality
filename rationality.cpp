@@ -97,7 +97,7 @@ Rationality::Rationality(QWidget *parent) :
 
     connect(fview,SIGNAL(isFiltred(bool)),f,SLOT(setChecked(bool)));
     connect(fview,SIGNAL(setFilter(QString)),fb,SLOT(filter(QString)));
-    connect(bb,SIGNAL(clicked()),f,SLOT(setChecked(bool)));
+    connect(bb,SIGNAL(clicked(bool)),f,SLOT(setChecked(bool)));
     connect(bb,SIGNAL(clicked()),fb,SLOT(setHistory()));
 
 
