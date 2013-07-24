@@ -51,4 +51,4 @@ HEADERS += rationality.h \
     elementfile.h
 FORMS += rationality.ui
 OTHER_FILES += 
-RESOURCES += Resource.qrc
+#RESOURCES += Resource.qrc
