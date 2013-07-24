@@ -8,4 +8,16 @@ mv in this directory
 $qmake
 $make
 
+after mv in 'FillDatabase' directory and again
+$qmake
+$make
+
+*To Run
+
+For fill the database go in FillDatabase directory and lunch 'FillDatabase', it creates the databes and show you an sql console.
+(type exit for close the application)
+
+For the rationality fm go in bin directory and lunch 'Rationality'.
+
+Have fun!
 
